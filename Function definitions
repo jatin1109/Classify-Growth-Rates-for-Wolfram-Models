@@ -1,0 +1,5 @@
+WolframModelRuleProperties[x_WolframModelEvolutionObject] := {x, 
+  x["FinalStatePlot"],
+   ListLinePlot[x["VertexCountList"]],
+   ListLinePlot[x["EdgeCountList"]], 
+  ResourceFunction["ConnectedHypergraphQ"][x["FinalState"]]}
