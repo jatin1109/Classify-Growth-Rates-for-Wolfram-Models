@@ -3,3 +3,13 @@ WolframModelRuleProperties[x_WolframModelEvolutionObject] := {x,
    ListLinePlot[x["VertexCountList"]],
    ListLinePlot[x["EdgeCountList"]], 
   ResourceFunction["ConnectedHypergraphQ"][x["FinalState"]]}
+
+WolframModelRuleGrowth[x_, y_, z_Integer] := 
+ Flatten[{RulePlot[ResourceFunction["WolframModel"][x]],
+   ResourceFunction["WolframModelPlot"][y], z, 
+   WolframModelObjectProperties[
+    ResourceFunction["WolframModel"][x, y, z]]}, 1]
+    
+WolframModelSignatureGrowth[x_] := 
+ Column[Table[WolframModelRuleGrowth[i, Keys[i], 10],
+   {i, ResourceFunction["EnumerateWolframModelRules"][x, None]}]]
