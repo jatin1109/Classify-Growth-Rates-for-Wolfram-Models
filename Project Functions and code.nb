@@ -1,0 +1,707 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[     29720,        699]
+NotebookOptionsPosition[     28085,        671]
+NotebookOutlinePosition[     28528,        688]
+CellTagsIndexPosition[     28485,        685]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "WolframModelObjectProperties", "[", "x_WolframModelEvolutionObject", "]"}],
+   " ", ":=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"RulePlot", "[", 
+     RowBox[{
+      RowBox[{"ResourceFunction", "[", "\"\<WolframModel\>\"", "]"}], "[", 
+      RowBox[{"x", "[", "\"\<Rules\>\"", "]"}], "]"}], "]"}], ",", " ", 
+    "\[IndentingNewLine]", 
+    RowBox[{"x", "[", "0", "]"}], ",", " ", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x", "[", "\"\<FinalState\>\"", "]"}], ";"}], ",", 
+    "\[IndentingNewLine]", " ", 
+    RowBox[{"ListLinePlot", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x", "[", "\"\<VertexCountList\>\"", "]"}], ",", " ", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"E", "^", "i"}], ")"}], "<=", 
+            RowBox[{
+             RowBox[{"x", "[", "\"\<VertexCountList\>\"", "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"-", "1"}], "]"}], "]"}]}], ",", " ", 
+           RowBox[{"E", "^", "i"}], ",", " ", "Nothing"}], "]"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "0", ",", " ", "10"}], "}"}]}], "]"}]}], "}"}], 
+     "]"}], ",", "\[IndentingNewLine]", " ", 
+    RowBox[{"ListLinePlot", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x", "[", "\"\<EdgeCountList\>\"", "]"}], ",", " ", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"E", "^", "i"}], ")"}], "<=", 
+            RowBox[{
+             RowBox[{"x", "[", "\"\<EdgeCountList\>\"", "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"-", "1"}], "]"}], "]"}]}], ",", " ", 
+           RowBox[{"E", "^", "i"}], ",", " ", "Nothing"}], "]"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "0", ",", " ", "10"}], "}"}]}], "]"}]}], "}"}], 
+     "]"}], ",", " ", "\[IndentingNewLine]", " ", 
+    RowBox[{"ListLinePlot", "[", 
+     RowBox[{"Map", "[", 
+      RowBox[{"GraphDiameter", ",", " ", 
+       RowBox[{"Map", "[", 
+        RowBox[{"UndirectedGraph", ",", " ", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+           "ResourceFunction", "[", "\"\<HypergraphToGraph\>\"", "]"}], ",", 
+           RowBox[{"x", "[", "\"\<StatesList\>\"", "]"}]}], "]"}]}], "]"}]}], 
+      "]"}], "]"}], ",", " ", 
+    RowBox[{
+     RowBox[{"ResourceFunction", "[", "\"\<ConnectedHypergraphQ\>\"", "]"}], 
+     "[", 
+     RowBox[{"x", "[", "\"\<FinalState\>\"", "]"}], "]"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.802953835578681*^9, 3.802953858702188*^9}, {
+   3.803023778675852*^9, 3.8030238303620815`*^9}, 3.803026239907283*^9, {
+   3.8030262819495826`*^9, 3.8030262839932065`*^9}, 3.8030310492660265`*^9, {
+   3.8030311864253654`*^9, 3.8030312244315853`*^9}, {3.8031162046097565`*^9, 
+   3.803116218891843*^9}, {3.8031182699768085`*^9, 3.803118281432598*^9}, {
+   3.8031186468480015`*^9, 3.8031186916033134`*^9}, {3.8031188159306817`*^9, 
+   3.803118833127686*^9}, {3.803119357865718*^9, 3.803119362911688*^9}, {
+   3.803127621835116*^9, 3.803127626313838*^9}, {3.803362651864606*^9, 
+   3.803362732500819*^9}, {3.8033629484708705`*^9, 3.803362950556308*^9}, {
+   3.8033629880761766`*^9, 3.803362989011013*^9}, {3.8033630281546164`*^9, 
+   3.803363031487994*^9}, {3.803363328465394*^9, 3.8033633333842497`*^9}, {
+   3.803363386922305*^9, 3.8033634012141676`*^9}, {3.803363522264537*^9, 
+   3.8033635596725245`*^9}, {3.803363610739936*^9, 3.8033636117766633`*^9}, {
+   3.8033636450925555`*^9, 3.803363661949217*^9}, {3.8033637358711967`*^9, 
+   3.8033637411709404`*^9}, {3.803375093946415*^9, 3.8033751063663373`*^9}, {
+   3.803375497495677*^9, 3.8033755003064213`*^9}, {3.803375666440771*^9, 
+   3.803375668915455*^9}},
+ CellLabel->"In[28]:=",ExpressionUUID->"caa06f61-3ab7-489b-a399-b887eac6695b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"WolframModelObjectProperties", " ", "::", " ", "usage"}], " ", 
+   "=", " ", 
+   "\"\<WolframModelObjectProperties takes a WolframModelEvolutionObject as \
+an input. It gives the list of: its underlying Rules, Initial State, Final \
+State, Line Plot of its vertex and edge counts at each stage, plot of \
+diameter at all states, and whether the hypergraph is final connected or not.\
+\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.8031278452438936`*^9, 3.80312784612915*^9}, {
+  3.803362992010767*^9, 3.8033629931089835`*^9}, {3.8033630362456183`*^9, 
+  3.803363084908963*^9}, {3.803363131083987*^9, 3.803363159838498*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"f23b0c90-fd45-4966-9b4c-512d24eef61e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WolframModelSignGrowthCon", "[", "x_", "]"}], " ", ":=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+        "ResourceFunction", "[", "\"\<ConnectedHypergraphQ\>\"", "]"}], 
+        "\[IndentingNewLine]", "[", 
+        RowBox[{
+         RowBox[{"ResourceFunction", "[", "\"\<WolframModel\>\"", "]"}], "[", 
+         RowBox[{"i", ",", " ", 
+          RowBox[{"Keys", "[", "i", "]"}], ",", " ", "3", ",", " ", 
+          "\"\<FinalState\>\""}], "]"}], "]"}], " ", "&&", " ", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Length", "@", 
+         RowBox[{
+          RowBox[{"ResourceFunction", "[", "\"\<WolframModel\>\"", "]"}], "[", 
+          RowBox[{"i", ",", " ", 
+           RowBox[{"Keys", "[", "i", "]"}], ",", " ", "3", ",", " ", 
+           "\"\<EdgeCountList\>\""}], "]"}]}], " ", ">", " ", "2"}]}], ",", 
+      " ", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ResourceFunction", "[", "\"\<WolframModel\>\"", "]"}], "[", 
+       RowBox[{"i", ",", " ", 
+        RowBox[{"Keys", "[", "i", "]"}], ",", " ", "10"}], "]"}], ",", " ", 
+      "Nothing"}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", " ", 
+      RowBox[{
+       RowBox[{
+       "ResourceFunction", "[", "\"\<EnumerateWolframModelRules\>\"", "]"}], 
+       "[", "x", "]"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8031150816753373`*^9, 3.80311516763161*^9}, {
+   3.8031152549963408`*^9, 3.803115294046753*^9}, {3.8031157550621157`*^9, 
+   3.8031157571278334`*^9}, {3.803116726480957*^9, 3.8031167664184017`*^9}, {
+   3.803116820775173*^9, 3.8031168256669874`*^9}, {3.8031168643384576`*^9, 
+   3.8031168748099146`*^9}, {3.8031169165051346`*^9, 3.803116974885768*^9}, {
+   3.8031170321570997`*^9, 3.8031170897558985`*^9}, {3.803119902517656*^9, 
+   3.803119924471793*^9}, 3.8031199996244*^9, {3.803120115351385*^9, 
+   3.8031201318846893`*^9}, {3.8031201638164506`*^9, 
+   3.8031201709121146`*^9}, {3.803120231677394*^9, 3.803120252696164*^9}, {
+   3.803120309614663*^9, 3.8031203124261074`*^9}, {3.8031203888775406`*^9, 
+   3.803120401492635*^9}, {3.8031205859490547`*^9, 3.8031205903252187`*^9}, {
+   3.8031207494112453`*^9, 3.8031207529533834`*^9}, {3.803121565797495*^9, 
+   3.8031216036788807`*^9}, {3.8033604939378395`*^9, 
+   3.8033605077264824`*^9}, {3.8033621080611715`*^9, 3.803362112304164*^9}},
+ CellLabel->"In[30]:=",ExpressionUUID->"22f4707d-9393-44e6-bf16-f3eeb878aaa0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"WolframModelSignGrowthCon", "::", "usage"}], " ", "=", " ", 
+   "\"\<WolframModelSignGrowthCon takes in a signature [x] and returns the \
+output of WolframModel[x, Keys[x], 10] minus the rules for which the \
+hypergraph at 3rd step is disconnected or does not grow after 3 steps.\>\""}],
+   ";"}]], "Input",
+ CellChangeTimes->{{3.8031171194573493`*^9, 3.803117243456659*^9}, {
+  3.803120432214385*^9, 3.8031204570884705`*^9}, {3.8033605344513893`*^9, 
+  3.8033605815544863`*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"f5c64d8d-3e44-4930-b3e7-167acc52549f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WolframModelMultiSignGrowthCon", "[", "x_", "]"}], " ", ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{"Rules", ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Rules", " ", "=", " ", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+        "ResourceFunction", "[", "\"\<EnumerateWolframModelRules\>\"", "]"}], 
+        ",", "  ", "x"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+           "ResourceFunction", "[", "\"\<ConnectedHypergraphQ\>\"", "]"}], 
+           "[", 
+           RowBox[{
+            RowBox[{"ResourceFunction", "[", "\"\<WolframModel\>\"", "]"}], 
+            "[", 
+            RowBox[{"i", ",", " ", 
+             RowBox[{"Keys", "[", 
+              RowBox[{"i", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", "3", ",", 
+             " ", "\"\<FinalState\>\""}], "]"}], "]"}], " ", "&&", " ", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Length", "@", 
+            RowBox[{
+             RowBox[{"ResourceFunction", "[", "\"\<WolframModel\>\"", "]"}], 
+             "[", 
+             RowBox[{"i", ",", " ", 
+              RowBox[{"Keys", "[", 
+               RowBox[{"i", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", "3", ",", 
+              " ", "\"\<EdgeCountList\>\""}], "]"}]}], " ", ">", " ", "2"}]}],
+          ",", " ", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"ResourceFunction", "[", "\"\<WolframModel\>\"", "]"}], "[", 
+          RowBox[{"i", ",", " ", 
+           RowBox[{"Keys", "[", 
+            RowBox[{"i", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", "10"}], "]"}], 
+         ",", " ", "Nothing"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", " ", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Map", "[", 
+            RowBox[{"RandomChoice", ",", " ", "Rules"}], "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", " ", 
+             RowBox[{
+              RowBox[{"Quotient", "[", 
+               RowBox[{
+                RowBox[{"Max", "[", 
+                 RowBox[{"Map", "[", 
+                  RowBox[{"Length", ",", " ", "Rules"}], "]"}], "]"}], ",", 
+                " ", "10"}], "]"}], "*", "3"}]}], "}"}]}], "]"}]}], "}"}]}], 
+      "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8034026000442095`*^9, 3.803402662547002*^9}, {
+   3.803402867690016*^9, 3.803402909864382*^9}, {3.8034033746014643`*^9, 
+   3.8034033874690113`*^9}, {3.8034042367816467`*^9, 3.803404335374343*^9}, 
+   3.8034044536408052`*^9, {3.8034045016597166`*^9, 3.803404505974989*^9}, {
+   3.8034045787803693`*^9, 3.8034046295322237`*^9}, {3.803404682047535*^9, 
+   3.8034046914453297`*^9}, {3.8034056348553505`*^9, 3.8034057499483776`*^9}, 
+   3.8034057814994426`*^9, {3.803405844112306*^9, 3.8034058770780745`*^9}, 
+   3.8034059122287707`*^9},ExpressionUUID->"ecf0f51c-ab82-4c63-aeb5-\
+fd1803ee7d0d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WolframModelMultiSignGrowthCon", "::", "usage"}], " ", "=", " ", 
+  "\"\<WolframModelMultiSignGrowth takes in a list of signatures and returns \
+a WolframModelEvolutionObject for a random set of rules of the signatures \
+given in x for all the connected and non-terminating.\>\""}]], "Input",
+ CellChangeTimes->{{3.8034051571338573`*^9, 3.803405203876112*^9}, {
+  3.8034069313413835`*^9, 3.8034069404660764`*^9}, {3.803407059019459*^9, 
+  3.8034070827401795`*^9}, {3.803407153514024*^9, 3.8034072064612722`*^9}, {
+  3.8034076079351816`*^9, 
+  3.803407626186965*^9}},ExpressionUUID->"0c477d73-7f34-490b-813b-\
+f320c3bb3b2d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "WolframModelLinearFilter", "[", "x_WolframModelEvolutionObject", "]"}], 
+  " ", ":=", " ", 
+  RowBox[{"Switch", "[", 
+   RowBox[{
+    RowBox[{"FindLinearRecurrence", "/@", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x", "[", "\"\<VertexCountList\>\"", "]"}], ",", " ", 
+       RowBox[{"x", "[", "\"\<EdgeCountList\>\"", "]"}]}], "}"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", 
+        RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", " ", 
+        RowBox[{"-", "1"}]}], "}"}]}], "}"}], ",", " ", "Nothing", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "1", "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", " ", 
+        RowBox[{"-", "1"}]}], "}"}]}], "}"}], ",", " ", "Nothing", ",", " ", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", " ", 
+        RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+      RowBox[{"{", "1", "}"}]}], "}"}], ",", " ", "Nothing", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "1", "}"}], ",", " ", 
+      RowBox[{"{", "1", "}"}]}], "}"}], ",", " ", "Nothing", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", " ", 
+        RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+      RowBox[{"FindLinearRecurrence", "[", 
+       RowBox[{"x", "[", "\"\<EdgeCountList\>\"", "]"}], "]"}]}], "}"}], ",", 
+    " ", "Nothing", ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "1", "}"}], ",", " ", 
+      RowBox[{"FindLinearRecurrence", "[", 
+       RowBox[{"x", "[", "\"\<EdgeCountList\>\"", "]"}], "]"}]}], "}"}], ",", 
+    " ", "Nothing", ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"FindLinearRecurrence", "[", 
+       RowBox[{"x", "[", "\"\<VertexCountList\>\"", "]"}], "]"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", " ", 
+        RowBox[{"-", "1"}]}], "}"}]}], "}"}], ",", " ", "Nothing", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"FindLinearRecurrence", "[", 
+       RowBox[{"x", "[", "\"\<VertexCountList\>\"", "]"}], "]"}], ",", " ", 
+      RowBox[{"{", "1", "}"}]}], "}"}], ",", " ", "Nothing", ",", 
+    "\[IndentingNewLine]", " ", "_", ",", " ", "x"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8033574316330414`*^9, 3.803357444726575*^9}, {
+  3.803360321147309*^9, 3.803360322994502*^9}, {3.8033756522041693`*^9, 
+  3.8033756590657744`*^9}, {3.8033764114559817`*^9, 3.8033765263141694`*^9}},
+ CellLabel->"In[32]:=",ExpressionUUID->"8434079a-a221-493b-b26e-5d0bc87c2522"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"WolframModelLinearFilter", "::", "usage"}], " ", "=", " ", 
+   "\"\<WolframModelLinearFilter takes a WolframModelEvolutionObject as an \
+input and returns the object unchanged if it does not show a linear growth \
+rate. It returns Nothing otherwise.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.803361569317395*^9, 3.8033616763474026`*^9}, 
+   3.803363312392041*^9, {3.803369493706647*^9, 3.803369518908613*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"93b152b2-f9f0-43b6-864a-0e12758dfc33"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "WolframModelObjectAsymptotic", "[", "x_WolframModelEvolutionObject", "]"}],
+   " ", ":=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Asymptotic", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"FindSequenceFunction", "[", "y", "]"}], "[", "i", "]"}], 
+        ",", " ", 
+        RowBox[{"i", "\[Rule]", " ", "Infinity"}]}], "]"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"y", ",", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"x", "[", "\"\<VertexCountList\>\"", "]"}], ",", " ", 
+          RowBox[{"x", "[", "\"\<EdgeCountList\>\"", "]"}]}], "}"}]}], 
+       "}"}]}], "]"}], ",", " ", "x"}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.8033917645240407`*^9, 3.803391823563566*^9}, {
+  3.8033918579997888`*^9, 3.8033918832555566`*^9}, {3.803392752358785*^9, 
+  3.8033927575229025`*^9}, {3.8033941962178288`*^9, 3.803394276335812*^9}, {
+  3.803394415197384*^9, 3.803394601549184*^9}, {3.8033949331487317`*^9, 
+  3.8033949335679502`*^9}, {3.803394968210909*^9, 3.8033949684947014`*^9}, {
+  3.8033950165444555`*^9, 3.8033950170213833`*^9}, {3.8033951721275773`*^9, 
+  3.803395177215639*^9}},
+ CellLabel->"In[34]:=",ExpressionUUID->"5e8585a7-4546-42f0-b91a-1e70e648842f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"WolframModelObjectAsymptotic", "::", "usage"}], " ", "=", " ", 
+   "\"\<WolframModelObjectVertexAsymptotic function takes in a \
+WolframModelEvolutionObject (x) and returns a list of the limit symbolic \
+expression of the growth rate of x[VertexCountList], x[EdgeCountList] and x \
+itself.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.8033934670616417`*^9, 3.8033936338902907`*^9}, {
+  3.8033946702328215`*^9, 3.8033946838564143`*^9}},
+ CellLabel->"In[35]:=",ExpressionUUID->"df7dac5d-29bb-4497-ae38-00c7f515ee67"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WolframModelExponentialFilter", "[", "x_", "]"}], " ", ":=", " ", 
+  RowBox[{"Which", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", 
+           RowBox[{"_Integer", "+", 
+            RowBox[{"_Integer", "*", "_Symbol"}]}], ")"}]}], ")"}]}], "]"}]}],
+      "]"}], ",", " ", "Nothing", ",", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "+", 
+          RowBox[{"_Integer", "*", "_Symbol"}]}], ")"}]}], "]"}]}], "]"}], 
+    ",", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "*", "_Symbol"}], ")"}]}], "]"}]}], "]"}], ",", 
+    " ", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", "_Symbol", ")"}]}], "]"}]}], "]"}], ",", " ", "Nothing", 
+    ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", 
+           RowBox[{"_Integer", "*", "_Symbol"}], ")"}]}], ")"}]}], "]"}]}], 
+     "]"}], ",", " ", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", "_Symbol", ")"}]}], ")"}]}], "]"}]}], "]"}], ",", " ", 
+    "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", 
+           RowBox[{"_Integer", "+", "_Symbol"}], ")"}]}], ")"}]}], "]"}]}], 
+     "]"}], ",", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "+", "_Symbol"}], ")"}]}], "]"}]}], "]"}], ",", 
+    " ", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", 
+           RowBox[{"_Integer", "+", 
+            RowBox[{"_Integer", "*", "_Symbol"}]}], ")"}]}], ")"}]}], "]"}]}],
+      "]"}], ",", " ", "Nothing", ",", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "+", 
+          RowBox[{"_Integer", "*", "_Symbol"}]}], ")"}]}], "]"}]}], "]"}], 
+    ",", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "*", "_Symbol"}], ")"}]}], "]"}]}], "]"}], ",", 
+    " ", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", "_Symbol", ")"}]}], "]"}]}], "]"}], ",", " ", "Nothing", 
+    ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", 
+           RowBox[{"_Integer", "*", "_Symbol"}], ")"}]}], ")"}]}], "]"}]}], 
+     "]"}], ",", " ", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", "_Symbol", ")"}]}], ")"}]}], "]"}]}], "]"}], ",", " ", 
+    "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "*", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "^", 
+          RowBox[{"(", 
+           RowBox[{"_Integer", "+", "_Symbol"}], ")"}]}], ")"}]}], "]"}]}], 
+     "]"}], ",", "Nothing", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"_Integer", "^", 
+        RowBox[{"(", 
+         RowBox[{"_Integer", "+", "_Symbol"}], ")"}]}], "]"}]}], "]"}], ",", 
+    " ", "Nothing", ",", "\[IndentingNewLine]", "True", ",", " ", 
+    RowBox[{"x", "[", 
+     RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8033916117233114`*^9, 3.803391746463973*^9}, {
+  3.8033918445701456`*^9, 3.803391849235695*^9}, {3.8033919897832584`*^9, 
+  3.803392064768385*^9}, {3.803392094954074*^9, 3.803392309309482*^9}, {
+  3.8033923632223806`*^9, 3.8033923881465883`*^9}, {3.803392439733842*^9, 
+  3.8033925457689605`*^9}, {3.8033927042912016`*^9, 3.8033927159971914`*^9}, {
+  3.8033927746877484`*^9, 3.8033928629080267`*^9}, {3.8033947193259025`*^9, 
+  3.8033947537671614`*^9}, {3.803395103880411*^9, 3.8033951634223633`*^9}},
+ CellLabel->"In[36]:=",ExpressionUUID->"490766ff-325c-4583-8062-6554a19ab1f0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"WolframModelExponentialFilter", "::", "usage"}], " ", "=", " ", 
+   "\"\<This function takes in the output of WolframModelObjectAsymptote and \
+returns nothing if the growth rate is exponential. It returns the \
+WolframModelEvolutionObject otherwise.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.8033938450430784`*^9, 3.803393963129154*^9}, {
+  3.803394775690917*^9, 3.803394784354373*^9}},
+ CellLabel->
+  "In[200]:=",ExpressionUUID->"f45771d9-4ac8-42da-add4-25f97702e9cf"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WolframModelInterestingRules", "[", "x_", "]"}], " ", ":=", " ", 
+  RowBox[{"Column", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{"WolframModelObjectProperties", ",", "  ", "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+      "WolframModelExponentialFilter", ",", " ", "\[IndentingNewLine]", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+        "WolframModelObjectAsymptotic", ",", " ", "\[IndentingNewLine]", 
+         RowBox[{"Map", "[", 
+          RowBox[{"WolframModelLinearFilter", ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Length", "[", "x", "]"}], ">", "1"}], ",", " ", 
+             RowBox[{"WolframModelMultiSignGrowthCon", "[", "x", "]"}], ",", 
+             " ", 
+             RowBox[{"WolframModelSignGrowthCon", "[", "x", "]"}]}], "]"}]}], 
+          "]"}]}], "]"}]}], "]"}]}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.803361688811649*^9, 3.8033617933570437`*^9}, {
+  3.8033618332659173`*^9, 3.8033618522828264`*^9}, {3.803361883672485*^9, 
+  3.803361921639907*^9}, {3.8033620198583975`*^9, 3.803362047508173*^9}, {
+  3.8033621219442434`*^9, 3.803362138986221*^9}, {3.8033751583569736`*^9, 
+  3.803375164849369*^9}, {3.8033813343479996`*^9, 3.803381372708083*^9}, {
+  3.8033940781668367`*^9, 3.8033941195884733`*^9}, {3.803394805029728*^9, 
+  3.8033948061165285`*^9}, {3.803402748002147*^9, 3.803402821527625*^9}},
+ CellLabel->"In[37]:=",ExpressionUUID->"da26d032-3355-4020-8eaa-4ca1b42d50a4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"WolframModelInterestingRules", "::", "usage"}], " ", "=", " ", 
+   "\"\<WolframModelInterestingRules takes in a signature or a list of \
+signatures as an input. It then returns the output of \
+WolframModelObjectProperties for the rules which give connected, \
+non-terminating, non-linear growth, and non-exponential growth models.\>\""}],
+   ";"}]], "Input",
+ CellChangeTimes->{{3.803363937598656*^9, 3.8033639703034253`*^9}, {
+  3.8033640131633606`*^9, 3.8033640195979214`*^9}, {3.803364149984708*^9, 
+  3.803364210178499*^9}, {3.803364244870964*^9, 3.8033642715326295`*^9}, {
+  3.8033813874442906`*^9, 3.8033813928203125`*^9}, {3.8034068584974527`*^9, 
+  3.803406864110819*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"682ceb0d-0a65-4dea-810a-505612adf372"]
+},
+WindowSize->{1152., 615.6},
+WindowMargins->{{
+  Automatic, -5.399999999999864}, {-5.399999999999977, Automatic}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (March 20, 2020)",
+StyleDefinitions->"ReverseColor.nb",
+ExpressionUUID->"513505b6-6bed-4cfe-9991-788c120e495e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[561, 20, 3956, 86, 146, "Input",ExpressionUUID->"caa06f61-3ab7-489b-a399-b887eac6695b"],
+Cell[4520, 108, 750, 13, 88, "Input",ExpressionUUID->"f23b0c90-fd45-4966-9b4c-512d24eef61e"],
+Cell[5273, 123, 2543, 51, 107, "Input",ExpressionUUID->"22f4707d-9393-44e6-bf16-f3eeb878aaa0"],
+Cell[7819, 176, 605, 11, 68, "Input",ExpressionUUID->"f5c64d8d-3e44-4930-b3e7-167acc52549f"],
+Cell[8427, 189, 3121, 72, 127, "Input",ExpressionUUID->"ecf0f51c-ab82-4c63-aeb5-fd1803ee7d0d"],
+Cell[11551, 263, 658, 11, 68, "Input",ExpressionUUID->"0c477d73-7f34-490b-813b-f320c3bb3b2d"],
+Cell[12212, 276, 2766, 72, 205, "Input",ExpressionUUID->"8434079a-a221-493b-b26e-5d0bc87c2522"],
+Cell[14981, 350, 540, 9, 68, "Input",ExpressionUUID->"93b152b2-f9f0-43b6-864a-0e12758dfc33"],
+Cell[15524, 361, 1283, 29, 49, "Input",ExpressionUUID->"5e8585a7-4546-42f0-b91a-1e70e648842f"],
+Cell[16810, 392, 563, 10, 68, "Input",ExpressionUUID->"df7dac5d-29bb-4497-ae38-00c7f515ee67"],
+Cell[17376, 404, 7814, 206, 361, "Input",ExpressionUUID->"490766ff-325c-4583-8062-6554a19ab1f0"],
+Cell[25193, 612, 522, 10, 68, "Input",ExpressionUUID->"f45771d9-4ac8-42da-add4-25f97702e9cf"],
+Cell[25718, 624, 1554, 29, 107, "Input",ExpressionUUID->"da26d032-3355-4020-8eaa-4ca1b42d50a4"],
+Cell[27275, 655, 806, 14, 68, "Input",ExpressionUUID->"682ceb0d-0a65-4dea-810a-505612adf372"]
+}
+]
+*)
+
