@@ -3,12 +3,12 @@ WolframModelObjectProperties[
    ResourceFunction["WolframModel"][x["Rules"]]], 
   x[0], 
   x["FinalState"];,
-   ListLinePlot[x["VertexCountList"], 
-   Table[If[(E^i) < x["VertexCountList"][[-1]], E^i, Nothing[]], {i, 
-     0, 10}]],
-   ListLinePlot[x["EdgeCountList"], 
-   Table[If[(E^i) < x["EdgeCountList"][[-1]], E^i, Nothing[]], {i, 0, 
-     10}]], 
+   ListLinePlot[{x["VertexCountList"], 
+    Table[If[(E^i) <= x["VertexCountList"][[-1]], E^i, Nothing], {i, 
+      0, 10}]}],
+   ListLinePlot[{x["EdgeCountList"], 
+    Table[If[(E^i) <= x["EdgeCountList"][[-1]], E^i, Nothing], {i, 0, 
+      10}]}], 
    ListLinePlot[
    Map[GraphDiameter, 
     Map[UndirectedGraph, 
@@ -40,22 +40,32 @@ steps.";
 WolframModelLinearFilter[x_WolframModelEvolutionObject] := 
  Switch[FindLinearRecurrence /@ {x["VertexCountList"], 
     x["EdgeCountList"]},
-  {{2, -1}, {2, -1}}, Nothing[],
-  {{1}, {2, -1}}, Nothing[], 
-  {{2, -1}, {1}}, Nothing[],
-  {{1}, {1}}, Nothing[],
+  {{2, -1}, {2, -1}}, Nothing,
+  {{1}, {2, -1}}, Nothing, 
+  {{2, -1}, {1}}, Nothing,
+  {{1}, {1}}, Nothing,
+  {{2, -1}, FindLinearRecurrence[x["EdgeCountList"]]}, Nothing,
+  {{1}, FindLinearRecurrence[x["EdgeCountList"]]}, Nothing,
+  {FindLinearRecurrence[x["VertexCountList"]], {2, -1}}, Nothing,
+  {FindLinearRecurrence[x["VertexCountList"]], {1}}, Nothing,
    _, x]
 
 WolframModelLinearFilter::usage = 
-  "WolframModelLinearFilter takes in a WolframModelEvolutionObject \
-and checks if the growth rate of the nodes or hyperedges of the \
-WolframModelEvolutionObject are completely linear.";
+  "WolframModelLinearFilter takes a WolframModelEvolutionObject as an \
+input and returns the object unchanged if it does not show a linear \
+growth rate. It returns Nothing otherwise.";
+
+WolframModelPowerFilter[x_WolframModelEvolutionObject] := 
+
+WolframModelPowerFilter::usage = "WolframModelPowerFilter takes a \
+WolframModelEvolutionObject as an input and returns the object \
+unchanged if it does not show an growth rate which is a power \
+function of an integer. It returns Nothing otherwise."
 
 WolframModelInterestingRules[x_] := 
- Column[Map[WolframModelObjectProperties, 
-   Map[WolframModelPowerFilter, 
-    Map[WolframModelLinearFilter, WolframModelSignGrowthCon[x]]]]]
-    
+ Column[Map[WolframModelObjectProperties,  
+   Map[WolframModelLinearFilter, WolframModelSignGrowthCon[x]]]]
+
 WolframModelInterestingRules::usage = 
   "WolframModelInterestingRules takes in a signature as an input. It \
 then returns the output of WolframModelObjectProperties for the rules \
