@@ -55,19 +55,66 @@ WolframModelLinearFilter::usage =
 input and returns the object unchanged if it does not show a linear \
 growth rate. It returns Nothing otherwise.";
 
-WolframModelPowerFilter[x_WolframModelEvolutionObject] := 
+WolframModelObjectAsymptotic[
+  x_WolframModelEvolutionObject] := {Table[
+   Asymptotic[FindSequenceFunction[y][i], 
+    i -> Infinity], {y, {x["VertexCountList"], x["EdgeCountList"]}}], 
+  x}
 
-WolframModelPowerFilter::usage = "WolframModelPowerFilter takes a \
-WolframModelEvolutionObject as an input and returns the object \
-unchanged if it does not show an growth rate which is a power \
-function of an integer. It returns Nothing otherwise."
+WolframModelObjectAsymptotic::usage = 
+  "WolframModelObjectVertexAsymptotic function takes in a \
+WolframModelEvolutionObject (x) and returns a list of the limit \
+symbolic expression of the growth rate of x[VertexCountList], \
+x[EdgeCountList] and x itself.";
+
+WolframModelExponentialFilter[x_] := Which[
+  MatchQ[x[[1]][[1]], 
+   HoldPattern[_Integer*(_Integer^(_Integer + _Integer*_Symbol))]], 
+  Nothing,
+  MatchQ[x[[1]][[1]], 
+   HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], Nothing, 
+  MatchQ[x[[1]][[1]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
+  Nothing, 
+  MatchQ[x[[1]][[1]], HoldPattern[_Integer^(_Symbol)]], Nothing, 
+  MatchQ[x[[1]][[1]], 
+   HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], Nothing, 
+  MatchQ[x[[1]][[1]], HoldPattern[_Integer*(_Integer^(_Symbol))]], 
+  Nothing, 
+  MatchQ[x[[1]][[1]], 
+   HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], Nothing, 
+  MatchQ[x[[1]][[1]], HoldPattern[_Integer^(_Integer + _Symbol)]], 
+  Nothing, 
+  MatchQ[x[[1]][[2]], 
+   HoldPattern[_Integer*(_Integer^(_Integer + _Integer*_Symbol))]], 
+  Nothing,
+  MatchQ[x[[1]][[2]], 
+   HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], Nothing, 
+  MatchQ[x[[1]][[2]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
+  Nothing, 
+  MatchQ[x[[1]][[2]], HoldPattern[_Integer^(_Symbol)]], Nothing, 
+  MatchQ[x[[1]][[2]], 
+   HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], Nothing, 
+  MatchQ[x[[1]][[2]], HoldPattern[_Integer*(_Integer^(_Symbol))]], 
+  Nothing, 
+  MatchQ[x[[1]][[2]], 
+   HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], Nothing, 
+  MatchQ[x[[1]][[2]], HoldPattern[_Integer^(_Integer + _Symbol)]], 
+  Nothing,
+  True, x[[2]]]
+
+WolframModelExponentialFilter::usage = 
+  "This function takes in the output of WolframModelObjectAsymptote \
+and returns nothing if the growth rate is exponential. It returns the \
+WolframModelEvolutionObject otherwise.";
 
 WolframModelInterestingRules[x_] := 
  Column[Map[WolframModelObjectProperties,  
-   Map[WolframModelLinearFilter, WolframModelSignGrowthCon[x]]]]
+   Map[WolframModelExponentialFilter, 
+    Map[WolframModelObjectAsymptotic, 
+     Map[WolframModelLinearFilter, WolframModelSignGrowthCon[x]]]]]]
 
 WolframModelInterestingRules::usage = 
   "WolframModelInterestingRules takes in a signature as an input. It \
 then returns the output of WolframModelObjectProperties for the rules \
 which give connected, non-terminating, non-linear growth, and \
-non-power growth models.";
+non-exponential growth models.";
