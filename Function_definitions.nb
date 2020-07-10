@@ -1,71 +1,63 @@
-WolframModelObjectPropertiesVisual[
-  x_WolframModelEvolutionObject] := {x["FinalStatePlot"],
-   ListLinePlot[x["VertexCountList"]],
-   ListLinePlot[x["EdgeCountList"]], 
+WolframModelObjectProperties[
+  x_WolframModelEvolutionObject] := {RulePlot[
+   ResourceFunction["WolframModel"][x["Rules"]]], 
+  x[0], 
+  x["FinalState"];,
+   ListLinePlot[x["VertexCountList"], 
+   Table[If[(E^i) < x["VertexCountList"][[-1]], E^i, Nothing[]], {i, 
+     0, 10}]],
+   ListLinePlot[x["EdgeCountList"], 
+   Table[If[(E^i) < x["EdgeCountList"][[-1]], E^i, Nothing[]], {i, 0, 
+     10}]], 
    ListLinePlot[
    Map[GraphDiameter, 
     Map[UndirectedGraph, 
      Map[ResourceFunction["HypergraphToGraph"], x["StatesList"]]]]], 
   ResourceFunction["ConnectedHypergraphQ"][x["FinalState"]]}
 
-WolframModelObjectPropertiesVisual :: usage = 
-  "WolframModelObjectPropertiesVisual takes a \
-WolframModelEvolutionObject as an input. It gives the list of: its \
-Final State Plot, Line Plot of its vertex and edge counts at each \
+WolframModelObjectProperties :: usage = 
+  "WolframModelObjectProperties takes a WolframModelEvolutionObject \
+as an input. It gives the list of: its underlying Rules, Initial \
+State, Final State, Line Plot of its vertex and edge counts at each \
 stage, plot of diameter at all states, and whether the hypergraph is \
 final connected or not.";
 
-WolframModelObjectProperties[
-  x_WolframModelEvolutionObject] := {x["FinalState"], 
-  x["VertexCountList"], x["EdgeCountList"], 
-   Map[GraphDiameter, 
-   Map[UndirectedGraph, 
-    Map[ResourceFunction["HypergraphToGraph"], x["StatesList"]]]], 
-  ResourceFunction["ConnectedHypergraphQ"][x["FinalState"]]}
-
-WolframModelObjectProperties :: usage = 
-  "WolframModelObjectProperties takes a WolframModelEvolutionObject \
-as an input. It gives the list of: its Final State, List of its \
-vertex and edge counts at each stage, list of diameter at all stages, \
-and whether the final hypergraph is connected or not.";
-
-WolframModelRuleGrowth[x_, y_, z_Integer] := 
- Flatten[{RulePlot[ResourceFunction["WolframModel"][x]],
-   ResourceFunction["WolframModelPlot"][y], z, 
-   WolframModelObjectProperties[
-    ResourceFunction["WolframModel"][x, y, z]]}, 1]
-
-WolframModelRuleGrowth::usage = 
-  "WolframModelRuleGrowth takes an input of a rule (x), initial \
-hypergraph (y), and number of steps (z) - in the same order. It \
-returns a list of Rule Plot, Plot of Initial Hypergraph, number of \
-steps, and the output of WolframModelObjectProperties for the \
-WolframModelEvolutionObject produced by the rule (x) applied on \
-initial hypergraph (y) for z steps.";
-
-WolframModelSignatureGrowth[x_] := 
- Column[Table[WolframModelRuleGrowth[i, Keys[i], 10],
-   {i, ResourceFunction["EnumerateWolframModelRules"][x]}]]
-
-WolframModelSignatureGrowth::usage = 
-  "WolframModelSignatureGrowth takes a signature (x) as an input. It \
-gives the table of the outputs of WolframModelRuleGrowth applied to \
-each rule produced by EnumerateWolframModelRules[x]. The number of \
-steps is 10, and the initial hypergraph is the same as the LHS of the \
-Rule.";
-
 WolframModelSignGrowthCon[x_] := 
- Column[Table[If[ResourceFunction["ConnectedHypergraphQ"]
-      [ResourceFunction["WolframModel"][i, Keys[i], 3, 
-       "FinalState"]] && 
-     Length@
-       ResourceFunction["WolframModel"][i, Keys[i], 3, 
-        "EdgeCountList"] > 2, 
-    WolframModelRuleGrowth[i, Keys[i], 10], Nothing],
-   {i, ResourceFunction["EnumerateWolframModelRules"][x]}]]
+ Table[If[ResourceFunction["ConnectedHypergraphQ"]
+     [ResourceFunction["WolframModel"][i, Keys[i], 3, "FinalState"]] && 
+    Length@
+      ResourceFunction["WolframModel"][i, Keys[i], 3, 
+       "EdgeCountList"] > 2, 
+   ResourceFunction["WolframModel"][i, Keys[i], 10], Nothing],
+  {i, ResourceFunction["EnumerateWolframModelRules"][x]}]
 
 WolframModelSignGrowthCon::usage = 
-  "WolframModelSignGrowthCon takes in a signature and returns the \
-output of WolframModelSignatureGrowth minus the rules for which the \
+  "WolframModelSignGrowthCon takes in a signature [x] and returns the \
+output of WolframModel[x, Keys[x], 10] minus the rules for which the \
 hypergraph at 3rd step is disconnected or does not grow after 3 \
 steps.";
+
+WolframModelLinearFilter[x_WolframModelEvolutionObject] := 
+ Switch[FindLinearRecurrence /@ {x["VertexCountList"], 
+    x["EdgeCountList"]},
+  {{2, -1}, {2, -1}}, Nothing[],
+  {{1}, {2, -1}}, Nothing[], 
+  {{2, -1}, {1}}, Nothing[],
+  {{1}, {1}}, Nothing[],
+   _, x]
+
+WolframModelLinearFilter::usage = 
+  "WolframModelLinearFilter takes in a WolframModelEvolutionObject \
+and checks if the growth rate of the nodes or hyperedges of the \
+WolframModelEvolutionObject are completely linear.";
+
+WolframModelInterestingRules[x_] := 
+ Column[Map[WolframModelObjectProperties, 
+   Map[WolframModelPowerFilter, 
+    Map[WolframModelLinearFilter, WolframModelSignGrowthCon[x]]]]]
+    
+WolframModelInterestingRules::usage = 
+  "WolframModelInterestingRules takes in a signature as an input. It \
+then returns the output of WolframModelObjectProperties for the rules \
+which give connected, non-terminating, non-linear growth, and \
+non-power growth models.";
