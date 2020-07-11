@@ -303,9 +303,32 @@ WolframModelInterestingRules[x_List, OptionsPattern[]] :=
     |>
    ],
   "FeatureSpacePlot",
-    
+  Module[
+   {ifinalstateplot},
+   ifinalstateplots = Rasterize[#, Background -> None] & /@
+     Table[
+      i["FinalStatePlot"],
+      {i, Map[
+        WolframModelExponentialFilter,  
+        Map[
+         WolframModelLinearFilter, 
+         If[
+          Length[x] > 1, 
+          WolframModelMultiSignGrowthCon[x], 
+          WolframModelSignGrowthCon[x[[1]]]
+          ]
+         ]
+        ]
+       }
+      ];
+   FeatureSpacePlot[
+    ifinalstateplots,
+    LabelingFunction -> (Placed[Pane[Erosion[#, 1.5], 30], Center] &),
+    PlotStyle -> None,
+    FeatureExtractor -> "ImageFeatures"
+    ]
+   ]
   ]
-
 WolframModelInterestingRules::usage = 
   "WolframModelInterestingRules takes in a list of signatures as an \
 input. It then returns the output of WolframModelObjectProperties for \
