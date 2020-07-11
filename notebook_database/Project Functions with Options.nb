@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       161,          7]
-NotebookDataLength[     52075,       1144]
-NotebookOptionsPosition[     49955,       1111]
-NotebookOutlinePosition[     50398,       1128]
-CellTagsIndexPosition[     50355,       1125]
+NotebookDataLength[     54730,       1201]
+NotebookOptionsPosition[     52610,       1168]
+NotebookOutlinePosition[     53053,       1185]
+CellTagsIndexPosition[     53010,       1182]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1069,18 +1069,75 @@ Cell[BoxData[
                 "\[IndentingNewLine]", "]"}]}], "}"}]}], 
             "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}]}]}], 
         "\[IndentingNewLine]", "|>"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
-    "\[IndentingNewLine]", "\"\<FeatureSpacePlot\>\"", ","}], 
-   "\[IndentingNewLine]", "  ", "\[IndentingNewLine]", "]"}]}]], "Input",
+    "\[IndentingNewLine]", "\"\<FeatureSpacePlot\>\"", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "ifinalstateplot", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ifinalstateplots", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Rasterize", "[", 
+           RowBox[{"#", ",", " ", 
+            RowBox[{"Background", "\[Rule]", "None"}]}], "]"}], "&"}], "/@", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"i", "[", "\"\<FinalStatePlot\>\"", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", " ", 
+             RowBox[{"Map", "[", "\[IndentingNewLine]", 
+              RowBox[{
+              "WolframModelExponentialFilter", ",", "  ", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Map", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                "WolframModelLinearFilter", ",", " ", "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Length", "[", "x", "]"}], ">", "1"}], ",", " ", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"WolframModelMultiSignGrowthCon", "[", "x", "]"}], 
+                   ",", " ", "\[IndentingNewLine]", 
+                   RowBox[{"WolframModelSignGrowthCon", "[", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "]"}]}], 
+                  "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+            "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "]"}]}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"FeatureSpacePlot", "[", "\[IndentingNewLine]", 
+        RowBox[{"ifinalstateplots", ",", "\[IndentingNewLine]", 
+         RowBox[{"LabelingFunction", "\[Rule]", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Placed", "[", 
+             RowBox[{
+              RowBox[{"Pane", "[", 
+               RowBox[{
+                RowBox[{"Erosion", "[", 
+                 RowBox[{"#", ",", "1.5"}], "]"}], ",", "30"}], "]"}], ",", 
+              "Center"}], "]"}], "&"}], ")"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotStyle", "\[Rule]", "None"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"FeatureExtractor", "\[Rule]", "\"\<ImageFeatures\>\""}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
  CellChangeTimes->CompressedData["
-1:eJwd0E0og3EAx/GFTEvTSpmXthATIS+1XLA1eavFrCeH2QrTsJLMS1xGkq1Y
-XjZhtIOWw9JSHrXrmGyK5MDBwVPMhLTZYV7G/7fDt8/9m987otAmsVisXBJk
-x7JrKOpVEtSXNULtXEkTfEk3NcO/+fF2KJiu7YDxyRkV/JR+aGC9uH4QCi2a
-YajUB3wqYlrF9hm8Kgj4NcTdfdsl9FCnyQNE3004DS5GHGq45fEm3OAZG4aI
-csbdAi2dl34T0SWiAjCr7vkXOkplccg95HHMRBu9kwE930flK8SU6E8lLO4P
-SeBXkVEKZQ9dbZC/yW2HmTqDf5WYWui9gFvOpVvozVffwwPhOQOrzeJHKA/R
-L3A9Z+EdBk+CYXhddRyDrc5RwxrRHJ2dgN0cN89KfArRCZkmpg/a7/L6oaVH
-pINWxZ4BKp1jU5BvZzsg/SZw2fBxOZLwH/SS27w=
-  "],ExpressionUUID->"da26d032-3355-4020-8eaa-4ca1b42d50a4"],
+1:eJwd0Gkog3EAx/HlJtFKGWkaYZFbjTfYIlctx9PyYqxcuUoyR6OwpFmxmE1z
+7oWevFhImVopmiOb0PKC4oUVs4U0vHDO/7cX3z7vv5yGrupmHwaDEUeCgZ9R
+2SLRE9/RmVIIm+XcYugKnSiBnrHeCsiW5VTCv/5BMXwXvEpgPi+/DcaqJB2Q
+6rQeiYlBaQvH8CLOapEQl9e059AkOvRtIR5duoOg4k1fD+dNZq9zzJGCdqLQ
+vlkKVVXnlgmiIUlkhZF5j79Qn1z0B8O2mCFKota4FA5N39up00S/j590mNjk
+5MOvhBEBLLqrKYcsXVgFjGiVWmaIAfHmUzhPT15BM6f+Fq7HnthhlpJ3D4VO
+owvORo+/QMeBww1tmTufsIzulqqJyo/RPlgbssnUEB+cRq/2YnsjXLyOaYKq
+uqRWqKlelUKK7hmArMVAPTQ+sw1afJx688pWKNQ6Yt/wntcMqk4H2x92lqCG
+paKhTPy6Blc90xuQdu9twytxsAlyKfkuvKEE+9CSazuGwpWhMzjl/2iD/3RD
+GMU=
+  "],
+ CellLabel->"In[19]:=",ExpressionUUID->"da26d032-3355-4020-8eaa-4ca1b42d50a4"],
 
 Cell[BoxData[
  RowBox[{
@@ -1144,8 +1201,8 @@ Cell[30634, 701, 645, 12, 68, "Input",ExpressionUUID->"f45771d9-4ac8-42da-add4-2
 Cell[31282, 715, 9694, 219, 653, "Input",ExpressionUUID->"aec2c918-489f-4950-a4c9-1f669c795dbf"],
 Cell[40979, 936, 748, 13, 68, "Input",ExpressionUUID->"1a2276cd-9d02-4d8d-b20d-e2950c4c88fa"],
 Cell[41730, 951, 448, 10, 28, "Input",ExpressionUUID->"d7135ea4-ecaa-44a5-a1e4-514c0b17c586"],
-Cell[42181, 963, 6103, 119, 1433, "Input",ExpressionUUID->"da26d032-3355-4020-8eaa-4ca1b42d50a4"],
-Cell[48287, 1084, 1664, 25, 205, "Input",ExpressionUUID->"682ceb0d-0a65-4dea-810a-505612adf372"]
+Cell[42181, 963, 8758, 176, 1931, "Input",ExpressionUUID->"da26d032-3355-4020-8eaa-4ca1b42d50a4"],
+Cell[50942, 1141, 1664, 25, 205, "Input",ExpressionUUID->"682ceb0d-0a65-4dea-810a-505612adf372"]
 }
 ]
 *)
