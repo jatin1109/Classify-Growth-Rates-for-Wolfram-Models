@@ -276,19 +276,19 @@ WolframModelInterestingRules[x_List, OptionsPattern[]] :=
      WolframModelSignGrowthCon[x[[1]]]
      ];
    <|
-    "Linear" : ->  Column[
+    "Linear" ->  Column[
       Map[
        WolframModelLinearFilterClassify,
        ObjRules
        ]
       ],
-    "Exponential" : ->  Column[
+    "Exponential" ->  Column[
       Map[
        WolframModelExponentialFilterClassify,
        ObjRules
        ]
       ],
-    "Neither" : -> Column[
+    "Neither" -> Column[
       Table[
        {i["Rules"], i[0]},
        {i, Map[
