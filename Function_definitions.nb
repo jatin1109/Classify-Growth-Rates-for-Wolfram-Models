@@ -99,53 +99,135 @@ input and returns the object unchanged if its [VertexCountList] AND \
 [EdgeCountList] both do not show a linear growth rate. It returns \
 Nothing otherwise.";
 
+WolframModelLinearFilterClassify[x_WolframModelEvolutionObject] := 
+ Switch[
+  FindLinearRecurrence /@ {x["VertexCountList"], x["EdgeCountList"]},
+  {{2, -1}, {2, -1}}, {x["Rules"], x[0]},
+  {{1}, {2, -1}}, {x["Rules"], x[0]}, 
+  {{2, -1}, {1}}, {x["Rules"], x[0]},
+  {{1}, {1}}, {x["Rules"], x[0]},
+   _, Nothing
+  ]
+
+WolframModelLinearFilterClassify::usage = 
+  "WolframModelLinearFilterClassify takes a \
+WolframModelEvolutionObject as an input and returns the underlying \
+rules and it's initial state if its [VertexCountList] AND \
+[EdgeCountList] both show a linear growth rate. It returns Nothing \
+otherwise.";
+
 WolframModelExponentialFilter[x_WolframModelEvolutionObject] := Module[
   {ObjAsmp},
   ObjAsmp = Table[
     Asymptotic[FindSequenceFunction[y][i], i -> Infinity],
     {y, {x["VertexCountList"], x["EdgeCountList"]}}
     ];
-  Which[
-   MatchQ[ObjAsmp[[1]], 
-    HoldPattern[_Integer*(_Integer^(_Integer + _Integer*_Symbol))]], 
-   Nothing,
-   MatchQ[ObjAsmp[[1]], 
-    HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], Nothing, 
-   MatchQ[ObjAsmp[[1]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
+  If[
+   Which[
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + \
+_Integer*_Symbol))]], True,
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], True, 
+     MatchQ[ObjAsmp[[1]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
+     True, 
+     MatchQ[ObjAsmp[[1]], HoldPattern[_Integer^(_Symbol)]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Symbol))]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer^(_Integer + _Symbol)]], True,
+     True, False 
+     ] &&
+    Which[
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + \
+_Integer*_Symbol))]], True,
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], True, 
+     MatchQ[ObjAsmp[[2]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
+     True, 
+     MatchQ[ObjAsmp[[2]], HoldPattern[_Integer^(_Symbol)]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Symbol))]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer^(_Integer + _Symbol)]], True,
+     True, False
+     ],
    Nothing, 
-   MatchQ[ObjAsmp[[1]], HoldPattern[_Integer^(_Symbol)]], Nothing, 
-   MatchQ[ObjAsmp[[1]], 
-    HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], Nothing, 
-   MatchQ[ObjAsmp[[1]], HoldPattern[_Integer*(_Integer^(_Symbol))]], 
-   Nothing, 
-   MatchQ[ObjAsmp[[1]], 
-    HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], Nothing, 
-   MatchQ[ObjAsmp[[1]], HoldPattern[_Integer^(_Integer + _Symbol)]], 
-   Nothing, 
-   MatchQ[ObjAsmp[[2]], 
-    HoldPattern[_Integer*(_Integer^(_Integer + _Integer*_Symbol))]], 
-   Nothing,
-   MatchQ[ObjAsmp[[2]], 
-    HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], Nothing, 
-   MatchQ[ObjAsmp[[2]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
-   Nothing, 
-   MatchQ[ObjAsmp[[2]], HoldPattern[_Integer^(_Symbol)]], Nothing, 
-   MatchQ[ObjAsmp[[2]], 
-    HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], Nothing, 
-   MatchQ[ObjAsmp[[2]], HoldPattern[_Integer*(_Integer^(_Symbol))]], 
-   Nothing, 
-   MatchQ[ObjAsmp[[2]], 
-    HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], Nothing, 
-   MatchQ[ObjAsmp[[2]], HoldPattern[_Integer^(_Integer + _Symbol)]], 
-   Nothing,
-   True, x
+   x
    ]
   ]
 
 WolframModelExponentialFilter::usage = 
   "This function takes in a WolframModelEvolutionObject and returns \
-nothing if the growth rate is exponential. It returns the \
+nothing if its [VertexCountList] AND [EdgeCountList] both do not show \
+an exponential growth rate. It returns the \
 WolframModelEvolutionObject otherwise.";
+
+WolframModelExponentialFilterClassify[x_WolframModelEvolutionObject] := 
+ Module[
+  {ObjAsmp},
+  ObjAsmp = Table[
+    Asymptotic[FindSequenceFunction[y][i], i -> Infinity],
+    {y, {x["VertexCountList"], x["EdgeCountList"]}}
+    ];
+  If[
+   Which[
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + \
+_Integer*_Symbol))]], True,
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], True, 
+     MatchQ[ObjAsmp[[1]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
+     True, 
+     MatchQ[ObjAsmp[[1]], HoldPattern[_Integer^(_Symbol)]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Symbol))]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], True, 
+     MatchQ[ObjAsmp[[1]], 
+      HoldPattern[_Integer^(_Integer + _Symbol)]], True,
+     True, False 
+     ] &&
+    Which[
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + \
+_Integer*_Symbol))]], True,
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer^(_Integer + _Integer*_Symbol)]], True, 
+     MatchQ[ObjAsmp[[2]], HoldPattern[_Integer^(_Integer*_Symbol)]], 
+     True, 
+     MatchQ[ObjAsmp[[2]], HoldPattern[_Integer^(_Symbol)]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Integer*_Symbol))]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Symbol))]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer*(_Integer^(_Integer + _Symbol))]], True, 
+     MatchQ[ObjAsmp[[2]], 
+      HoldPattern[_Integer^(_Integer + _Symbol)]], True,
+     True, False
+     ],
+   {x["Rules"], x[0]}, 
+   Nothing
+   ]
+  ]
+
+WolframModelExponentialFilterClassify::usage = 
+  "This function takes in a WolframModelEvolutionObject and returns \
+the underlying rules and initial state if its [VertexCountList] AND \
+[EdgeCountList] both show an exponential growth rate. It returns \
+Nothing otherwise.";
 
 Options[WolframModelInterestingRules] = {"Output Type" -> "Default"}
 
@@ -186,9 +268,42 @@ WolframModelInterestingRules[x_List, OptionsPattern[]] :=
     ]
    ],
   "Classify",
-    ,
+  Module[
+   {ObjRules},
+   ObjRules = If[
+     Length[x] > 1,
+     WolframModelMultiSignGrowthCon[x],
+     WolframModelSignGrowthCon[x[[1]]]
+     ];
+   <|
+    "Linear" : ->  Column[
+      Map[
+       WolframModelLinearFilterClassify,
+       ObjRules
+       ]
+      ],
+    "Exponential" : ->  Column[
+      Map[
+       WolframModelExponentialFilterClassify,
+       ObjRules
+       ]
+      ],
+    "Neither" : -> Column[
+      Table[
+       {i["Rules"], i[0]},
+       {i, Map[
+         WolframModelExponentialFilter,
+         Map[
+          WolframModelLinearFilter,
+          ObjRules
+          ]
+         ]}
+       ]
+      ]
+    |>
+   ],
   "FeatureSpacePlot",
-  
+    
   ]
 
 WolframModelInterestingRules::usage = 
@@ -202,8 +317,8 @@ Type'.
 the components of default output. This is not recommended as it is \
 too computationally expensive to run on Personal Computers.
   'Output Type' -> 'Classify' : This returns a list of associations \
-for each {rule, initial state} pair with their growth rates, which \
-can be Linear, Exponential, or Neither.
+for growth rates, which can be Linear, Exponential, or Neither with \
+the {Rules, Initial State} that exhibit that growth rate.
   'Output Type' -> 'FeatureSpacePlot' : This returns a \
 FeatureSpacePlot of the final states of all the non-linear and \
 non-exponential models.";
