@@ -1,4 +1,4 @@
-WolframModelObjectProperties[x_WolframModelEvolutionObject] := {
+WolframModelObjectProperties[x_] := {
   x["Rules"], 
   x[0], 
   x["FinalState"],
@@ -16,14 +16,13 @@ as an input. It gives the list of: its underlying Rules, Initial \
 State, Final State, its vertex and edge count list, list of diameter \
 at each stage, and whether the hypergraph is final connected or not.";
 
-WolframModelObjectPropertiesVisual[x_WolframModelEvolutionObject] := {
+WolframModelObjectPropertiesVisual[x_] := {
   RulePlot[ResourceFunction["WolframModel"][x["Rules"]]], 
   ResourceFunction["WolframModelPlot"][x[0]], 
   x["FinalStatePlot"],
   ListLinePlot[{x["VertexCountList"], 
-    Table[
-     If[(E^i) <= x["VertexCountList"][[-1]], E^i, Nothing], {i, 0, 
-      10}]}, PlotLegends -> {"Vertex Count", "Exp(x)"}],
+    Table[If[(E^i) <= x["VertexCountList"][[-1]], E^i, Nothing], {i, 
+      0, 10}]}, PlotLegends -> {"Vertex Count", "Exp(x)"}],
   ListLinePlot[{x["EdgeCountList"], 
     Table[If[(E^i) <= x["EdgeCountList"][[-1]], E^i, Nothing], {i, 0, 
       10}]}, PlotLegends -> {"Edge Count", "Exp(x)"}], 
@@ -42,7 +41,7 @@ of Initial State, Plot of Final State, Line Plot of its vertex and \
 edge counts at each stage - compared with Exp(x), plot of diameter at \
 all states, and whether the hypergraph is final connected or not.";
 
-WolframModelSignGrowthCon[x_] := ParallelTable[
+WolframModelSignGrowthCon[x_] := Table[
   If[
    ResourceFunction["ConnectedHypergraphQ"][
      ResourceFunction["WolframModel"][i, Keys[i], 3, "FinalState"]] && 
@@ -64,7 +63,7 @@ steps.";
 WolframModelMultiSignGrowthCon[x_] := Module[
   {Rules},
   Rules = Map[ResourceFunction["EnumerateWolframModelRules"],  x];
-  ParallelTable[
+  Table[
    If[
     ResourceFunction["ConnectedHypergraphQ"][
       ResourceFunction["WolframModel"][i, Keys[i[[1]]], 3, 
@@ -74,9 +73,7 @@ WolframModelMultiSignGrowthCon[x_] := Module[
     ResourceFunction["WolframModel"][i, Keys[i[[1]]], 10], 
     Nothing
     ],
-   {i, Table[
-     Map[RandomChoice, Rules], {j, 
-      Quotient[Max[Map[Length, Rules]], 10]*3}]}
+   {i, Table[Map[RandomChoice, Rules], {j, Max[Map[Length, Rules]]}]}
    ]
   ]
 
@@ -85,8 +82,7 @@ WolframModelMultiSignGrowthCon::usage =
 returns a WolframModelEvolutionObject for a random set of rules of \
 the signatures given in x for all the connected and non-terminating.";
 
-WolframModelLinearFilter[x_WolframModelEvolutionObject] := 
- Switch[
+WolframModelLinearFilter[x_] := Switch[
   FindLinearRecurrence /@ {x["VertexCountList"], x["EdgeCountList"]},
   {{2, -1}, {2, -1}}, Nothing,
   {{1}, {2, -1}}, Nothing, 
@@ -101,8 +97,7 @@ input and returns the object unchanged if its [VertexCountList] AND \
 [EdgeCountList] both do not show a linear growth rate. It returns \
 Nothing otherwise.";
 
-WolframModelLinearFilterClassify[
-  x_WolframModelEvolutionObject] := Switch[
+WolframModelLinearFilterClassify[x_] := Switch[
   FindLinearRecurrence /@ {x["VertexCountList"], x["EdgeCountList"]},
   {{2, -1}, {2, -1}}, {x["Rules"], x[0]},
   {{1}, {2, -1}}, {x["Rules"], x[0]}, 
@@ -118,8 +113,7 @@ rules and it's initial state if its [VertexCountList] AND \
 [EdgeCountList] both show a linear growth rate. It returns Nothing \
 otherwise.";
 
-WolframModelExponentialFilter[
-  x_WolframModelEvolutionObject] := Module[
+WolframModelExponentialFilter[x_] := Module[
   {ObjAsmp},
   ObjAsmp = Table[
     Asymptotic[FindSequenceFunction[y][i], i -> Infinity],
@@ -175,8 +169,7 @@ nothing if its [VertexCountList] AND [EdgeCountList] both do not show \
 an exponential growth rate. It returns the \
 WolframModelEvolutionObject otherwise.";
 
-WolframModelExponentialFilterClassify[
-  x_WolframModelEvolutionObject] := Module[
+WolframModelExponentialFilterClassify[x_] := Module[
   {ObjAsmp},
   ObjAsmp = Table[
     Asymptotic[FindSequenceFunction[y][i], i -> Infinity],
@@ -244,6 +237,7 @@ WolframModelInterestingRules[x_List, OptionsPattern[]] :=
      WolframModelMultiSignGrowthCon[x],
      WolframModelSignGrowthCon[x[[1]]]
      ];
+   ParallelNeeds["SetReplace`"];
    LinearFilterMap1 = ParallelMap[
      WolframModelLinearFilter,
      ObjRules1
@@ -267,6 +261,7 @@ WolframModelInterestingRules[x_List, OptionsPattern[]] :=
      WolframModelMultiSignGrowthCon[x],
      WolframModelSignGrowthCon[x[[1]]]
      ];
+   ParallelNeeds["SetReplace`"];
    LinearFilterMap2 = ParallelMap[
      WolframModelLinearFilter,
      ObjRules2
@@ -290,6 +285,7 @@ WolframModelInterestingRules[x_List, OptionsPattern[]] :=
      WolframModelMultiSignGrowthCon[x],
      WolframModelSignGrowthCon[x[[1]]]
      ];
+   ParallelNeeds["SetReplace`"];
    LinearFilterMap3 = ParallelMap[
      WolframModelLinearFilter,
      ObjRules3
@@ -328,11 +324,12 @@ WolframModelInterestingRules[x_List, OptionsPattern[]] :=
      WolframModelMultiSignGrowthCon[x], 
      WolframModelSignGrowthCon[x[[1]]]
      ];
+   ParallelNeeds["SetReplace`"];
    LinearFilterMap4 = ParallelMap[
      WolframModelLinearFilter, 
      ObjRules4
      ];
-   ExpFilterMap4 = Map[
+   ExpFilterMap4 = ParallelMap[
      WolframModelExponentialFilter,  
      LinearFilterMap4
      ];
